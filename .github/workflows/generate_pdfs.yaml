@@ -40,9 +40,9 @@ jobs:
           md2pdf "$md_file" "$pdf_file"
         done
 
-  - name: Push to repo
-    run: |
-      git push origin main
-    env:
-      GITHUB_TOKEN: ${{ secrets.PAT} }}
+    - name: Push to repo
+      run: |
+        git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT} }}
 
