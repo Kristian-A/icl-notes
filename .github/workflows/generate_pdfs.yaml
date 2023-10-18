@@ -28,9 +28,9 @@ jobs:
 
     - name: Generate new PDFs
       run: |
-        for md_file in $(find . -name "*.md"); do
-          pdf_dir="pdf/$("dirname" "$md_file")"
-          pdf_file="$pdf_dir/$("basename" "$md_file" .md).pdf"
+        find . -name "*.md" | while IFS= read -r md_file; do
+          pdf_dir="pdf/$(dirname "$md_file")"
+          pdf_file="$pdf_dir/$(basename "$md_file" .md).pdf"
 
           echo "Creating directory $pdf_dir"
           echo "Filename is $pdf_file"
