@@ -35,9 +35,11 @@ jobs:
 
           sed -i 's/!\[\[\(.*\)\]\]/![\1](\1)/g' "$md_file"
 
-          pdf_dir="pdf/$(dirname "$md_file")"
-          html_file="$(basename "$md_file" .md).html"
-          pdf_file="$pdf_dir/$(basename "$md_file" .md).pdf"
+          base_dir = $(dirname "$md_file")
+
+          pdf_dir="pdf/$base_dir"
+          html_file="$(base_dir .md).html"
+          pdf_file="$pdf_dir/$(base_dir .md).pdf"
 
           echo "Creating directory $pdf_dir"
           echo "Filename is $pdf_file"
