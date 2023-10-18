@@ -33,6 +33,8 @@ jobs:
         find . -name "*.md" | while IFS= read -r md_file; do
           md_file="${md_file#./}"
 
+          sed -i 's/!\[\[\(.*\)\]\]/![\1](\1)/g' "$md_file"
+
           pdf_dir="pdf/$(dirname "$md_file")"
           html_file="$pdf_dir/$(basename "$md_file" .md).html"
           pdf_file="$pdf_dir/$(basename "$md_file" .md).pdf"
@@ -41,7 +43,7 @@ jobs:
           echo "Filename is $pdf_file"
           mkdir -p "$pdf_dir"
           pandoc "$md_file" -s -t html5 --mathjax -o "$html_file"
-          wkhtmltopdf --no-local-file-access "$html_file" "$pdf_file"
+          wkhtmltopdf "$html_file" "$pdf_file"
           rm "$html_file"
         done
 
