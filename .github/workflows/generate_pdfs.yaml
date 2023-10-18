@@ -43,7 +43,7 @@ jobs:
           echo "Filename is $pdf_file"
           mkdir -p "$pdf_dir"
           pandoc "$md_file" -s -t html5 --mathjax -o "$html_file"
-          wkhtmltopdf --disable-external-links "$html_file" "$pdf_file"
+          wkhtmltopdf --enable-local-file-access "$html_file" "$pdf_file"
           rm "$html_file"
         done
 
