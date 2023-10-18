@@ -17,10 +17,10 @@ jobs:
       with:
         python-version: 3.x
 
-    - name: Install pandoc
+    - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y pandoc texlive-xetex
+        sudo apt-get install -y pandoc wkhtmltopdf
 
     - name: Delete old PDFs
       run: |
@@ -34,12 +34,15 @@ jobs:
           md_file="${md_file#./}"
 
           pdf_dir="pdf/$(dirname "$md_file")"
+          html_file="$pdf_dir/$(basename "$md_file" .md).html"
           pdf_file="$pdf_dir/$(basename "$md_file" .md).pdf"
 
           echo "Creating directory $pdf_dir"
           echo "Filename is $pdf_file"
           mkdir -p "$pdf_dir"
-          pandoc "$md_file" -s -o "$pdf_file" --mathjax
+          pandoc "$md_file" -s -t html5 --mathjax -o "$html_file"
+          wkhtmltopdf "$html_file" "$pdf_file"
+          rm "$html_file"
         done
 
     - name: Push to repo
