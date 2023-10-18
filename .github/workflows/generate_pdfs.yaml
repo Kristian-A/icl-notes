@@ -44,6 +44,8 @@ jobs:
 
     - name: Push to repo
       run: |
+        git config --global user.email "kristian.zh.apostolov@gmail.com"
+        git config --global user.name "Kristian Apostolov"
         git add pdf/*
         git commit -m "Generate PDFs"
         git push origin main
