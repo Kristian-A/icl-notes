@@ -40,12 +40,11 @@ jobs:
           md2pdf "$md_file" "$pdf_file"
         done
 
-    - name: Commit and push PDFs
+    - name: Push changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add pdf/
-        git commit -m "Regenerate PDFs" || echo "No changes to commit"
-        git push
+        git config user.name "Kristian Apostolov"
+        git config user.email "kristian.zh.apsotolov@gmail.com"
+        git push origin main
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
+
