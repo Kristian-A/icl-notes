@@ -45,3 +45,5 @@ jobs:
         git add pdf/
         git commit -m "Regenerate PDFs" || echo "No changes to commit"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
