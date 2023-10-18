@@ -1,6 +1,8 @@
 name: Generate PDFs from Markdown
-
 on: [push, workflow_dispatch]
+
+permissions:
+  contents: write
 
 jobs:
   generate_pdfs:
@@ -42,7 +44,6 @@ jobs:
 
     - name: Push to repo
       run: |
-        echo $GITHUB_TOKEN != ""
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
