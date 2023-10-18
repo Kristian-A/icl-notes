@@ -1,6 +1,6 @@
 name: Generate PDFs from Markdown
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   generate_pdfs:
