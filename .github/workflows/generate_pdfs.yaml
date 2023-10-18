@@ -20,7 +20,7 @@ jobs:
     - name: Install pandoc
       run: |
         sudo apt-get update
-        sudo apt-get install -y pandoc
+        sudo apt-get install -y pandoc texlive-xetex
 
     - name: Delete old PDFs
       run: |
