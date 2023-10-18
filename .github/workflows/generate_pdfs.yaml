@@ -22,7 +22,9 @@ jobs:
 
     - name: Delete old PDFs
       run: |
-        find pdf -name "*.pdf" -type f -delete
+        if [ -d "pdf" ]; then
+          rm -rf pdf
+        fi
 
     - name: Generate new PDFs
       run: |
