@@ -42,7 +42,7 @@ jobs:
 
     - name: Push to repo
       run: |
-        echo $GITHUB_TOKEN
+        echo $GITHUB_TOKEN != ""
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
