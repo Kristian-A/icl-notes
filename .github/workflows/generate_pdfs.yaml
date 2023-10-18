@@ -1,46 +1,45 @@
 name: Generate PDFs from Markdown
 
-on: [push]
+on:
+  push:
+    paths:
+    - '**.md'
 
 jobs:
-  build:
+  generate_pdfs:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Identify changed markdown files
-      id: getfile
-      run: |
-        files=$(git diff --name-only HEAD^ HEAD | grep ".md$")
-        echo "::set-output name=files::$files"
-
-    - name: Set up Python
-      if: steps.getfile.outputs.files != ''
+    - name: Setup Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9
+        python-version: 3.x
 
-    - name: Install pandoc
-      if: steps.getfile.outputs.files != ''
-      run: sudo apt-get install pandoc
-
-    - name: Install Python dependencies
-      if: steps.getfile.outputs.files != ''
+    - name: Install md2pdf
       run: |
-        pip install pypandoc
+        python -m pip install --upgrade pip
+        pip install md2pdf
 
-    - name: Convert MD to PDF
-      if: steps.getfile.outputs.files != ''
+    - name: Delete old PDFs
       run: |
-        IFS=" " read -ra FILES <<< "${{ steps.getfile.outputs.files }}"
-        python script_name.py "${FILES[@]}"
+        find pdf -name "*.pdf" -type f -delete
+
+    - name: Generate new PDFs
+      run: |
+        for md_file in $(find . -name "*.md"); do
+          pdf_dir="pdf/$(dirname $md_file)"
+          pdf_file="$pdf_dir/$(basename $md_file .md).pdf"
+          mkdir -p $pdf_dir
+          md2pdf $md_file $pdf_file
+        done
 
     - name: Commit and push PDFs
-      if: steps.getfile.outputs.files != ''
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add -A
-        git commit -m "Add generated PDFs" || echo "No changes to commit"
+        git add pdf/
+        git commit -m "Regenerate PDFs" || echo "No changes to commit"
         git push
