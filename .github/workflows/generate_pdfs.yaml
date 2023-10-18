@@ -29,9 +29,11 @@ jobs:
     - name: Generate new PDFs
       run: |
         for md_file in $(find . -name "*.md"); do
-          echo "Generating PDF for $("dirname" "$md_file")"
           pdf_dir="pdf/$("dirname" "$md_file")"
-          pdf_file="$pdf_dir/$(basename "$md_file" .md).pdf"
+          pdf_file="$pdf_dir/$("basename" "$md_file" .md).pdf"
+
+          echo "Creating directory $pdf_dir"
+          echo "Filename is $pdf_file"
           mkdir -p "$pdf_dir"
           md2pdf "$md_file" "$pdf_file"
         done
