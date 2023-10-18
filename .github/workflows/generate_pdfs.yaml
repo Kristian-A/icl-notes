@@ -35,7 +35,7 @@ jobs:
 
           sed -i 's/!\[\[\(.*\)\]\]/![\1](\1)/g' "$md_file"
 
-          base_dir = "$(dirname "$md_file")"
+          base_dir="$(dirname "$md_file")"
 
           pdf_dir="pdf/$base_dir"
           html_file="$(base_dir .md).html"
