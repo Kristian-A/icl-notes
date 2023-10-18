@@ -40,12 +40,9 @@ jobs:
           md2pdf "$md_file" "$pdf_file"
         done
 
-    - name: Push changes
-      run: |
-        # git config user.name "Kristian Apostolov"
-        # git config user.email "kristian.zh.apsotolov@gmail.com"
-        # git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Kristian-A/icl-notes.git
-        git push origin main
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT }}
+  - name: Push to repo
+    run: |
+      git push origin main
+    env:
+      GITHUB_TOKEN: ${{ secrets.PAT} }}
 
