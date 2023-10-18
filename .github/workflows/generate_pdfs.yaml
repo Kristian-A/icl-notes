@@ -44,7 +44,7 @@ jobs:
 
     - name: Push to repo
       run: |
+        git add pdf/*
+        git commit -m "Generate PDFs"
         git push origin main
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT }}
 
