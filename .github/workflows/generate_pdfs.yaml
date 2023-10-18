@@ -41,7 +41,8 @@ jobs:
           pdf_file="$pdf_dir/$(basename "$md_file" .md).pdf"
 
           echo "Creating directory $pdf_dir"
-          echo "Filename is $pdf_file"
+          echo "PDF will be located at $pdf_file"
+          echo "HTML file will be located at $html_file"
           mkdir -p "$pdf_dir"
           pandoc "$md_file" -s -t html5 --mathjax -o "$html_file"
           wkhtmltopdf --enable-local-file-access "$html_file" "$pdf_file"
