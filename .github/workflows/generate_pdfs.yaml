@@ -3,11 +3,8 @@ name: Generate PDFs from Markdown
 on: [push]
 
 jobs:
-  identify_changes:
+  build:
     runs-on: ubuntu-latest
-    outputs:
-      changed_files: ${{ steps.getfile.outputs.files }}
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -18,22 +15,18 @@ jobs:
         files=$(git diff --name-only HEAD^ HEAD | grep ".md$")
         echo "::set-output name=files::$files"
 
-  build:
-    if: jobs.identify_changes.outputs.changed_files != ''
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
     - name: Set up Python
+      if: steps.getfile.outputs.files != ''
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
 
     - name: Install pandoc
+      if: steps.getfile.outputs.files != ''
       run: sudo apt-get install pandoc
 
     - name: Install Python dependencies
+      if: steps.getfile.outputs.files != ''
       run: |
         pip install pypandoc
 
