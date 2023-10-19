@@ -1,0 +1,1 @@
+**Certificate Deposit (CD)** -  A financial product offered by banks and credit unions that allows individuals to deposit money for a predetermined period of time in exchange for a fixed interest rate. 
