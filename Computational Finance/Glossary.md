@@ -1,1 +1,3 @@
 **Certificate Deposit (CD)** -  A financial product offered by banks and credit unions that allows individuals to deposit money for a predetermined period of time in exchange for a fixed interest rate. 
+
+**Net Present Value (NPV)** -  Calculates the difference between the present value of cash inflows (such as returns and dividends) and the present value of cash outflows (such as initial investment and operating costs) over a specified time period. A positive NPV indicates that the investment is expected to generate more value than it costs.
