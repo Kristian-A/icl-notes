@@ -191,7 +191,7 @@ if __name__ == '__main__':
     with gzip.open(path_mempool, 'r') as f:
         transactions_json = json.load(f)
 
-    block_factory = BlockFactory(test_blocks[0], transactions_json, start_difficulty=6)
+    block_factory = BlockFactory(test_blocks[0], transactions_json, start_difficulty=5)
     blocks = block_factory.mine_n(1)
 
     block_factory.save_blocks(blocks)
